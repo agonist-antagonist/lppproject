@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+body{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+    
+}
+
+html, body {
+    background-color: maroon;
+}
+
+a{
+    text-decoration: none;
+    color: whitesmoke;
+}
+.logo{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.logo h1{
+    text-align: center;
+    font-size: 30px;
+    color: whitesmoke;
+}
+.w_inner{
+    width: 1200px;
+    background: maroon;
+    margin: 0 auto;
+}
+.header ul{
+    display: flex;
+}
+.header ul li {
+width: 200px;
+text-align: center;
+border-right: 1px solid whitesmoke;
+}
+header ul li:first-child{
+    border-left: 1px solid whitesmoke;
+}
+.header ul li a{
+    display: block;
+    text-align: center;
+}
+.header_img{
+    text-align: center;
+}
+.container_service h2{
+    text-align: center;
+    font-weight: bold;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: whitesmoke;
+}
+.container_service .service_block{
+    display: flex;
+    justify-content: space-around;
+}
+.container_service .service{
+    text-align: center;
+   flex-direction: column;
+    align-items: center;
+}
+.container_service .service img{
+margin-bottom: 10px;
+min-width: 150px;
+height: 600px;
+object-fit: cover;
+}
+
+.container_service .service .ttl{
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 12px;
+    text-align: center;
+}
+.container_service .service .explain{
+    margin-bottom: 20px;
+    text-align: center;
+}
+.container_service .service a{
+    background: rgb(7, 51, 245);
+    padding: 15px 20px 12px;
+}
