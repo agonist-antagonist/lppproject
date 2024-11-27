@@ -26,6 +26,7 @@ a{
 .logo h1{
     text-align: center;
     font-size: 30px;
+    margin-bottom: 20px;
     color: whitesmoke;
 }
 .w_inner{
