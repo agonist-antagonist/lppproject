@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 
-
 body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 15px;
@@ -12,6 +11,13 @@ body{
 
 html, body {
     background-color: maroon;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 100px;
+    margin: 20px 0;
+    color: whitesmoke
 }
 
 a{

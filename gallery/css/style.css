@@ -12,6 +12,13 @@ html, body {
     background-color: maroon;
 }
 
+header h1 {
+    text-align: center;
+    font-size: 80px;
+    margin: 20px 0;
+    color: whitesmoke
+}
+
 a{
     text-decoration: none;
     color: whitesmoke;
