@@ -15,6 +15,20 @@ body {
     height: 100vh; /* 全画面表示 */
 }
 
+@media screen and (max-width: 600px) {
+    body {
+        font-size: 40px; /* スマートフォンでは文字を小さく */
+    }
+
+    h2.video-title {
+        font-size: 24px; /* サブタイトルの文字も小さく */
+    }
+    
+    video {
+        width: 100%; /* 動画を画面幅に合わせて調整 */
+    }
+}
+
 /* 見出しスタイル */
 header h1 {
     font-size: 80px;
