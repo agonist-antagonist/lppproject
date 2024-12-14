@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+    height: 100%; /* ページ全体の高さ */
+    background: url('../img/bataille.JPG') center/cover no-repeat; /* 画像ファイルのパス */
+    color: whitesmoke;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 100px;
+    margin: 20px 0;
+}
+
+.logo {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.logo p {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: whitesmoke; /* 上の文字と同じ色に */
+}
