@@ -14,8 +14,7 @@ html, body {
 }
 
 header h1 {
-    text-align: center;
-    font-size: 100px;
+    font-size: 20px;
     margin: 20px 0;
     color: whitesmoke
 }
@@ -89,4 +88,9 @@ object-fit: cover;
 }
 .container_service .service .explain{
     margin-bottom: 20px;
-    text-align: ce
+    text-align: center;
+}
+.container_service .service a{
+    background: rgb(7, 51, 245);
+    padding: 15px 20px 12px;
+}
