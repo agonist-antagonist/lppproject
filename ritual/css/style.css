@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 40px;
+    font-size: 20px;
     margin: 0;
     padding: 0;
     height: 100%; /* ページ全体の高さ */
@@ -23,7 +23,7 @@ header h1 {
 
 .logo p {
     text-align: center;
-    font-size: 40px;
+    font-size: 20px;
     margin-bottom: 20px;
     color: whitesmoke; /* 上の文字と同じ色に */
 }
