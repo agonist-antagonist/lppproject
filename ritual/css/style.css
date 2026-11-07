@@ -1,29 +1,84 @@
 @charset "UTF-8";
 
-body {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 20px;
-    margin: 0;
-    padding: 0;
-    height: 100%; /* ページ全体の高さ */
-    background: url('../img/bataille.JPG') center/cover no-repeat; /* 画像ファイルのパス */
+.info-page {
+    min-height: 100vh;
+    background: #150d0d url('../img/bataille.JPG') center top / cover no-repeat;
     color: whitesmoke;
+    font: 16px/1.65 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-header h1 {
-    text-align: center;
-    font-size: 20px;
-    margin: 20px 0;
+.info {
+    width: min(760px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: clamp(16px, 4vw, 32px);
+    box-sizing: border-box;
+    background: rgb(13 9 9 / 88%);
+    overflow-wrap: anywhere;
 }
 
-.logo {
-    margin-top: 20px;
-    margin-bottom: 20px;
+.event {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    align-items: start;
+    gap: clamp(16px, 4vw, 32px);
 }
 
-.logo p {
-    text-align: center;
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: whitesmoke; /* 上の文字と同じ色に */
+.event img {
+    width: 100%;
+    height: auto;
+}
+
+.event h1 {
+    margin: 8px 0;
+    padding: 0;
+    font-size: clamp(20px, 4vw, 28px);
+    line-height: 1.25;
+}
+
+.lineup h2 {
+    margin-top: 14px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.lineup p:last-child {
+    margin-top: 10px;
+}
+
+.artists {
+    margin-top: 28px;
+}
+
+.artists > h2 {
+    margin-bottom: 14px;
+    font-weight: bold;
+}
+
+.artist {
+    padding: 14px 0;
+    border-top: 1px solid rgb(245 245 245 / 30%);
+}
+
+.artist h3 {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.artist-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 16px;
+    margin-top: 4px;
+}
+
+.artist-links a {
+    color: inherit;
+    padding: 4px 0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+@media (max-width: 560px) {
+    .event { grid-template-columns: minmax(0, 1fr); }
+    .event img { width: min(100%, 280px); }
 }

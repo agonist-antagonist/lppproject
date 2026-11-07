@@ -1,0 +1,30 @@
+/* Shared adjustments: preserve the desktop layout and fit narrow screens. */
+img, video, iframe { max-width: 100%; }
+.w_inner { max-width: 100%; box-sizing: border-box; }
+.logo p, header h1 { overflow-wrap: anywhere; }
+.soundcloud-embed iframe { display: block; border: 0; }
+/* Artist links keep the existing page's text color. */
+.logo p a { color: inherit; text-decoration: underline; }
+@media screen and (max-width: 760px) {
+    html, body { width: 100%; min-width: 0; }
+    body { box-sizing: border-box; }
+    .w_inner { width: 100%; max-width: 100%; box-sizing: border-box; }
+    .header ul { display: flex; flex-wrap: wrap; }
+    .header ul li { width: 33.333333%; box-sizing: border-box; margin: 8px 0; }
+    .header ul li a { padding: 8px 2px; overflow-wrap: anywhere; }
+    .logo { padding-left: 12px; padding-right: 12px; }
+    .logo img, .header_img img { max-width: 100%; height: auto; }
+    header h1 { font-size: clamp(26px, 7vw, 44px); line-height: 1.2; padding: 0 12px; }
+    .logo h1 { font-size: clamp(22px, 6vw, 30px); line-height: 1.25; }
+    .logo p { font-size: 16px; line-height: 1.6; }
+    .container_service h2 { font-size: clamp(24px, 7vw, 36px); padding: 0 12px; }
+    .container_service .service_block { flex-direction: column; gap: 36px; padding: 0 12px 28px; }
+    .container_service .service { min-width: 0; }
+    .container_service .service img { min-width: 0; width: auto; max-width: 100%; height: auto; max-height: 60vh; object-fit: contain; }
+    .container_service .service a { display: inline-block; }
+    .video-container { width: 100%; box-sizing: border-box; padding: 0 12px; }
+    video { width: 100%; height: auto; }
+    .video-title { font-size: 24px; }
+    .subtitle { font-size: 16px; line-height: 1.5; overflow-wrap: anywhere; }
+    .title { font-size: 24px; padding: 0 12px; overflow-wrap: anywhere; }
+}
