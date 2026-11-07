@@ -27,3 +27,6 @@ header h1 {
     margin-bottom: 20px;
     color: whitesmoke; /* 上の文字と同じ色に */
 }
+
+.text-content strong { font-weight: 700; }
+.text-content em { font-style: italic; }
