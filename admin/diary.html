@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>DIARY / 投稿・編集</title>
+<link rel="stylesheet" href="editor.css">
+<script src="../data/catalog.js"></script>
+<script src="../data/diary.js"></script>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/diary-zip.js"></script>
+<style>.media-field{margin-top:14px}.media-field input{margin-top:5px}.media-field small{overflow-wrap:anywhere}.wide{grid-column:1/-1}.actions{margin-bottom:15px}.media-remove{padding:3px 8px;font-size:12px;margin-top:5px}.edit-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}#entry-text{min-height:210px}#status{white-space:pre-wrap}@media(max-width:700px){.edit-fields{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<header><a href="../diary/index.html">DIARY</a><h1>投稿・編集</h1><a href="index.html">台帳編集</a></header>
+<main>
+<p>日付・本文・音源・画像・動画を組み合わせて記録します。各欄は任意です。「下書きを保存」はこの端末への保存です。「更新ZIPを書き出す」で得たファイルを展開し、サイトの同名フォルダへ上書きしてGitHubへアップロードすると公開されます。</p>
+<div class="actions"><button id="new-entry" type="button">新しい記録</button><button id="export-diary" type="button">更新ZIPを書き出す</button><label class="import-label">更新ZIPを読み込む<input id="import-diary" type="file" accept=".zip"></label><button id="preview-diary" type="button">下書きをプレビュー</button></div>
+<p id="status" role="status" aria-live="polite">読み込み中…</p>
+<div class="editor-layout">
+<aside><label>記録<select id="entries" size="12"></select></label><button id="delete-entry" type="button">この記録を削除</button><button id="published-data" type="button">公開データから読み直す</button></aside>
+<section>
+<form id="diary-form">
+<div class="edit-fields">
+<label>日付<input name="date" type="date"></label>
+<label>表示範囲<select name="visibility"><option value="public">通常・地下の両方</option><option value="hidden">地下のみ</option><option value="draft">非表示</option></select></label>
+<label class="wide">タイトル<input name="title" type="text"></label>
+<label class="wide">本文<textarea name="text" id="entry-text"></textarea></label>
+<label class="wide">アーティスト名<input name="artist" type="text"></label>
+</div>
+<div id="media-fields"></div>
+<button class="save" type="submit">下書きを保存</button>
+</form>
+</section>
+</div>
+<details><summary>更新ファイルと素材について</summary>
+<p>音源・画像・動画はファイルを選ぶか、サイト内のパス・https URLを入力します。動画サービスのURLは動画へのリンクとして表示します。音源はMP3/M4A、動画はMP4を推奨します。画像は書き出し時に長辺1600px以内へ縮小します。</p>
+<p>更新ZIPには全記録のdata/diary.jsと、この編集画面で選んだ素材をまとめます。既存素材を使う場合は、元のファイルもサイトに残してください。更新ZIPを読み込むと別端末でも続きから編集できます。</p>
+<p>1ファイル50MB、選択素材の合計150MBまでです。長い動画は外部URLを使うと軽くできます。保存データはこの端末のブラウザ内にあるため、更新ZIPも手元に保管してください。</p>
+</details>
+</main>
+<script src="diary-editor.js"></script>
+</body>
+</html>
