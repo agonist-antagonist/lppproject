@@ -1,25 +1,35 @@
-body {
+html.flyer-document:not(.is-deep) {
+    background: #080808;
+}
+
+.flyer-page {
+    min-height: 100vh;
     margin: 0;
-    padding: 0;
+    padding: clamp(20px, 5vh, 48px) 16px;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
-    background: url('/flyer/img/tjblue.png') no-repeat center center fixed;
-    background-size: cover;
+    background-color: #080808;
+    background-image:
+        linear-gradient(to bottom, rgb(8 8 8 / 92%), transparent 42%),
+        url('../img/process-flyer.jpg');
+    background-position: center, center bottom;
+    background-repeat: no-repeat;
+    background-size: cover, auto 100%;
     color: whitesmoke;
     text-align: center;
-  }
-  
-  .title {
-    font-size: 30px;
-    margin-top: 20px;
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  }
-  
-  .soundcloud-embed {
-    margin-top: 30px;
-    width: 100%;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
+}
+
+.flyer-page .title {
+    margin: 0;
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: normal;
+}
+
+.soundcloud-embed {
+    width: min(100%, 720px);
+    margin: 20px auto 0;
+}
+
+@media (max-width: 560px) {
+    .flyer-page { background-size: cover, cover; }
+}
