@@ -7,7 +7,8 @@
   while (walker.nextNode()) nodes.push(walker.currentNode);
   const linked = new Set();
   for (const node of nodes) {
-    const regex = /(^|\n)([\t ]*)(\d+)([\t ]*)(?=\r?\n|$)/g;
+    if (node.parentElement.closest('a')) continue;
+    const regex = /(^|\n)([^\S\r\n]*)(\d+(?:-\d+)?)([^\S\r\n]*)(?=(?:Asylum[^\S\r\n]*)?(?:\r?\n|$))/g;
     let match, start = 0; const fragment = document.createDocumentFragment(); let changed = false;
     while ((match = regex.exec(node.textContent))) {
       const room = numbers.get(match[3]); if (!room || linked.has(room.id)) continue;
@@ -15,7 +16,7 @@
       fragment.append(node.textContent.slice(start, match.index), match[1] + match[2]);
       const link = document.createElement('a');
       link.className = 'text-room-number'; link.textContent = match[3];
-      link.href = L.localURL('rooms/index.html?room=' + encodeURIComponent(room.id));
+      link.href = L.safeURL(room.externalURL) || L.localURL('rooms/index.html?room=' + encodeURIComponent(room.id));
       link.setAttribute('aria-label', match[3]); fragment.append(link, match[4]);
       start = match.index + match[0].length;
     }
