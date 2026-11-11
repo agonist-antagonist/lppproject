@@ -5,12 +5,12 @@
   let data = clone(original), kind = 'market', selected = data.market[0]?.id, dirty = false;
   const $ = selector => document.querySelector(selector), fields = $('#fields'), form = $('#record-form');
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const csvColumns = ['kind','id','title','category','visibility','year','genre','description','file','image','images','duration','tags','price','displayPrice','stock','orderEnabled','saleType','previewAudio','preview1','preview2','previewSeconds','bandcampURL','bandcampAlbum','number','loopId','poster','hasAudio'];
+  const csvColumns = ['kind','id','title','category','visibility','year','genre','description','file','image','images','duration','tags','price','displayPrice','stock','orderEnabled','saleType','previewAudio','preview1','preview2','previewSeconds','bandcampURL','bandcampAlbum','number','externalURL','loopId','poster','hasAudio'];
   const status = (message, error = false) => { $('#status').textContent = message; $('#status').classList.toggle('error', error); };
   const definitions = () => ({
     process:[['id','作品ID'],['title','タイトル'],['category','分類','select',data.processCategories],['visibility','公開状態','select',['public','hidden','draft']],['year','制作年'],['genre','音楽ジャンル'],['description','説明','textarea'],['file','音源ファイルの場所'],['image','画像ファイルの場所'],['duration','長さ（秒）','number'],['tags','タグ（ | で区切る）']],
     market:[['id','作品ID'],['title','タイトル'],['category','分類','select',data.marketCategories],['visibility','公開状態','select',['public','hidden','draft']],['description','説明','textarea'],['images','画像ファイルの場所（1行に1枚）','textarea'],['price','価格（数値）','number'],['displayPrice','価格の表示文字'],['stock','在庫','number'],['orderEnabled','注文を受け付ける','checkbox'],['saleType','販売区分'],['previewAudio','既存Process作品IDで試聴（旧形式）'],['preview1','試聴1の音源パス'],['preview2','試聴2の音源パス'],['previewSeconds','試聴の長さ（秒）','number'],['bandcampURL','BandcampのURL'],['bandcampAlbum','BandcampのアルバムID'],['tags','タグ（ | で区切る）']],
-    rooms:[['id','小部屋ID'],['number','Textの番号'],['title','タイトル（空欄なら表示しません）'],['loopId','使う動画','select',data.loops.map(x=>x.id)],['visibility','公開状態','select',['public','hidden','draft']]],
+    rooms:[['id','小部屋ID'],['number','Textの番号'],['externalURL','外部リンクURL（空欄なら小部屋）'],['title','タイトル（空欄なら表示しません）'],['loopId','使う動画','select',data.loops.map(x=>x.id)],['visibility','公開状態','select',['public','hidden','draft']]],
     loops:[['id','動画ID'],['file','動画ファイルの場所'],['poster','静止画ファイルの場所'],['duration','長さ（秒）','number'],['hasAudio','音声あり','checkbox']],
     settings:[['hiddenCode','隠し階層の入口コード'],['contactEmail','注文メールの宛先']]
   })[kind];
@@ -27,7 +27,8 @@
         if (['process','market'].includes(section) && !(section === 'process' ? catalog.processCategories : catalog.marketCategories).includes(item.category)) throw new Error(item.id + ' の分類を確認してください。');
         if (section !== 'loops' && !['public','hidden','draft'].includes(item.visibility)) throw new Error(item.id + ' の公開状態を確認してください。');
         if (section === 'rooms') {
-          if (!/^\d+$/.test(String(item.number)) || numbers.has(String(item.number))) throw new Error('Textの番号が空欄・数字以外・重複のいずれかです。'); numbers.add(String(item.number));
+          if (!/^\d+(?:-\d+)?$/.test(String(item.number)) || numbers.has(String(item.number))) throw new Error('Textの番号が空欄・数字以外・重複のいずれかです。'); numbers.add(String(item.number));
+          if (item.externalURL && !/^https?:\/\/\S+$/i.test(item.externalURL)) throw new Error(item.id + ' の外部リンクはhttpかhttpsのURLを使ってください。');
           if (!catalog.loops.some(loop => loop.id === item.loopId)) throw new Error(item.id + ' の動画IDが見つかりません。');
         }
         for (const key of ['file','image','poster',...(section === 'market' ? ['images'] : [])]) {
@@ -97,9 +98,9 @@
   function add(copy) {
     if (!beforeChange()) return;
     const section = kind;
-    const item = copy && current() ? clone(current()) : section === 'process' ? {title:'',category:'DEMO',visibility:'draft',duration:45,tags:[]} : section === 'market' ? {title:'',category:'ARTWORK',visibility:'draft',images:[],tags:[],orderEnabled:false,stock:0} : section === 'rooms' ? {title:'',number:String(Math.max(0,...data.rooms.map(x=>Number(x.number)))+1),loopId:data.loops[0]?.id || '',visibility:'draft'} : {file:'',poster:'',duration:0,hasAudio:false};
+    const item = copy && current() ? clone(current()) : section === 'process' ? {title:'',category:'DEMO',visibility:'draft',duration:45,tags:[]} : section === 'market' ? {title:'',category:'ARTWORK',visibility:'draft',images:[],tags:[],orderEnabled:false,stock:0} : section === 'rooms' ? {title:'',number:String(Math.max(0,...data.rooms.map(x=>Number(x.number)).filter(Number.isFinite))+1),loopId:data.loops[0]?.id || '',visibility:'draft'} : {file:'',poster:'',duration:0,hasAudio:false};
     item.id = unique(section);
-    if (copy && section === 'rooms') item.number = String(Math.max(0,...data.rooms.map(x=>Number(x.number)))+1);
+    if (copy && section === 'rooms') item.number = String(Math.max(0,...data.rooms.map(x=>Number(x.number)).filter(Number.isFinite))+1);
     data[section].push(item); selected = item.id; $('#record-search').value = ''; list(); show(); draft();
   }
   $('#add-record').onclick = () => add(false); $('#duplicate-record').onclick = () => add(true);
